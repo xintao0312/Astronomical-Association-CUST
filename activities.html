@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>社团活动 · CUST 理工天文</title>
+<meta name="description" content="路边天文夜、摄影工坊、天文讲堂、星空观测营 —— CUST 理工天文的常规活动介绍，以及本学期日程与观测记录。">
+<meta name="theme-color" content="#eef4ff">
+<meta name="color-scheme" content="light dark">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CUST 理工天文">
+<meta property="og:title" content="社团活动 · CUST 理工天文">
+<meta property="og:description" content="路边天文夜、摄影工坊、天文讲堂、星空观测营 —— CUST 理工天文的常规活动介绍，以及本学期日程与观测记录。">
+<meta property="og:image" content="assets/img/milkyway-horizon-1400.jpg">
+
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/favicon.png">
+
+<!-- theme applied before first paint: no flash of the wrong scheme -->
+<script>
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("cust-astro-theme"); } catch (e) {}
+  if (t !== "light" && t !== "dark") t = "dark";
+  document.documentElement.setAttribute("data-theme", t);
+})();
+</script>
+<style>
+  :root{background:#eef4ff}
+  :root[data-theme="dark"]{background:#06070f}
+</style>
+<link rel="preload" as="image" href="assets/img/milkyway-horizon.jpg" media="(min-width: 861px)">
+
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false">
+  <defs>
+<!-- brand mark: refractor tube, star, and an orbit -->
+    <symbol id="i-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.5 20.5 14 9"/>
+      <path d="M11.4 6.4 17 9.6a1.4 1.4 0 0 1 .5 1.9l-.6 1a1.4 1.4 0 0 1-1.9.5l-5.6-3.2a1.4 1.4 0 0 1-.5-1.9l.6-1a1.4 1.4 0 0 1 1.9-.5Z"/>
+      <path d="M18.6 9.5 21 11"/>
+      <path d="M9.6 9.4 7.4 7.9"/>
+      <path d="M2.4 21.6 4 17.6"/>
+      <circle cx="19.6" cy="4.4" r="1.5" fill="currentColor" stroke="none"/>
+    </symbol>
+
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4.1"/>
+      <path d="M12 2.4v2.3M12 19.3v2.3M2.4 12h2.3M19.3 12h2.3M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/>
+    </symbol>
+
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.4 14.6A8.5 8.5 0 0 1 9.4 3.6a8.6 8.6 0 1 0 11 11Z"/>
+    </symbol>
+
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <path d="M4 7h16M4 12h16M4 17h16"/>
+    </symbol>
+
+    <symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19.5V5M6 11l6-6 6 6"/>
+    </symbol>
+
+    <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 12h15M13.5 6l6 6-6 6"/>
+    </symbol>
+
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+      <path d="M6 6l12 12M18 6 6 18"/>
+    </symbol>
+
+    <symbol id="i-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14.5 5.5 8 12l6.5 6.5"/>
+    </symbol>
+
+    <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9.5 5.5 16 12l-6.5 6.5"/>
+    </symbol>
+
+    <symbol id="i-zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="10.6" cy="10.6" r="6.1"/>
+      <path d="M15.2 15.2 20.4 20.4M8.2 10.6h4.8M10.6 8.2v4.8"/>
+    </symbol>
+
+    <symbol id="i-telescope" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 20.4 9.6 9.9"/>
+      <path d="M8.2 8.1 16 3.6l4.2 7.1-7.8 4.5z"/>
+      <path d="M15 10.4 17.6 14"/>
+      <path d="M7.2 12.2 4.6 8.7"/>
+      <path d="M7.6 20.4 12.4 12"/>
+    </symbol>
+
+    <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.2 8.4h3l1.5-2.6h7.4l1.5 2.6h3.2A1.4 1.4 0 0 1 21 9.8v8.3a1.4 1.4 0 0 1-1.4 1.4H4.4A1.4 1.4 0 0 1 3 18.1V9.8a1.4 1.4 0 0 1 1.4-1.4Z"/>
+      <circle cx="12" cy="13.6" r="3.3"/>
+    </symbol>
+
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 4.6h5.4A2.6 2.6 0 0 1 12 7.2v12.2a2 2 0 0 0-2-2H4z"/>
+      <path d="M20 4.6h-5.4A2.6 2.6 0 0 0 12 7.2v12.2a2 2 0 0 1 2-2h6z"/>
+    </symbol>
+
+    <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.6"/>
+      <path d="M14.9 9.1 13.3 13.3 9.1 14.9l1.6-4.2z"/>
+    </symbol>
+
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9.2" cy="8.4" r="3.4"/>
+      <path d="M2.8 20.2a6.6 6.6 0 0 1 12.8 0"/>
+      <path d="M16 5.6a3.2 3.2 0 0 1 0 6.2"/>
+      <path d="M17.6 14.4a6.4 6.4 0 0 1 3.6 5.8"/>
+    </symbol>
+
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.4" y="5.4" width="17.2" height="15.2" rx="2.4"/>
+      <path d="M3.4 10.2h17.2M8.2 3.4v3.6M15.8 3.4v3.6"/>
+    </symbol>
+
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.6"/>
+      <path d="M12 7.4V12l3.2 2"/>
+    </symbol>
+
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 21.4s6.6-5.6 6.6-10.6a6.6 6.6 0 1 0-13.2 0C5.4 15.8 12 21.4 12 21.4Z"/>
+      <circle cx="12" cy="10.6" r="2.5"/>
+    </symbol>
+
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5.4" width="18" height="13.2" rx="2.4"/>
+      <path d="m3.8 7.2 8.2 6 8.2-6"/>
+    </symbol>
+
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.4 12.2c0 4-3.8 7.2-8.4 7.2a9.7 9.7 0 0 1-2.6-.3L4.6 20.6l1.2-3.6a6.8 6.8 0 0 1-2.2-4.8c0-4 3.8-7.2 8.4-7.2s8.4 3.2 8.4 7.2Z"/>
+    </symbol>
+
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.8 12.8 9.4 17.4 19.2 6.8"/>
+    </symbol>
+
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.6"/>
+      <path d="M12 11v5.4M12 7.8h.01"/>
+    </symbol>
+
+    <symbol id="i-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2.6l1.9 5.6 5.6 1.9-5.6 1.9L12 17.6l-1.9-5.6L4.5 10.1l5.6-1.9z"/>
+      <path d="M18.8 16.4l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/>
+    </symbol>
+
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.6"/>
+      <path d="M3.6 12h16.8"/>
+      <path d="M12 3.4c2.3 2.4 3.5 5.3 3.5 8.6s-1.2 6.2-3.5 8.6c-2.3-2.4-3.5-5.3-3.5-8.6S9.7 5.8 12 3.4Z"/>
+    </symbol>
+
+    <symbol id="i-aperture" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.6"/>
+      <path d="M12 3.4 16.6 12M20.4 14.4 11.4 14.4M16 19.6 8.4 14M3.6 9.6h9M8 4.4l7.6 5.6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<header class="site-nav">
+  <div class="shell nav-inner">
+    <a class="brand" href="index.html" aria-label="CUST 理工天文 · 返回首页">
+        <span class="brand__mark" aria-hidden="true">
+          <picture>
+            <source type="image/webp" srcset="assets/img/aac-badge-96.webp 1x, assets/img/aac-badge-192.webp 2x">
+            <img src="assets/img/aac-badge-96.png"
+                 srcset="assets/img/aac-badge-96.png 1x, assets/img/aac-badge-192.png 2x"
+                 width="34" height="34" alt="" decoding="async">
+          </picture>
+        </span>
+        <span class="brand__text">
+          <span class="brand__name">CUST 理工天文</span>
+          <span class="brand__sub">Astronomical Association of CUST</span>
+        </span>
+      </a>
+
+    <nav aria-label="主导航">
+      <ul class="nav-menu" id="primary-menu">
+          <li><a class="nav-link" href="index.html">首页</a></li>
+          <li><a class="nav-link" href="activities.html" aria-current="page">社团活动</a></li>
+          <li><a class="nav-link" href="gallery.html">星空画廊</a></li>
+          <li><a class="nav-link" href="about.html">关于我们</a></li>
+          <li><a class="nav-link" href="index.html#join">加入我们</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" type="button" data-theme-toggle data-active="light"
+              aria-label="切换到暗色模式" aria-pressed="false">
+        <span class="theme-toggle__thumb" aria-hidden="true"></span>
+        <span class="theme-toggle__opt" aria-hidden="true"><svg><use href="#i-sun"></use></svg></span>
+        <span class="theme-toggle__opt" aria-hidden="true"><svg><use href="#i-moon"></use></svg></span>
+      </button>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="打开导航菜单">
+        <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================== page head ============================== -->
+  <section class="page-head page-head--photo" aria-labelledby="page-title">
+    <div class="starfield" data-starfield aria-hidden="true"></div>
+    <div class="shell">
+      <nav aria-label="面包屑">
+        <ol class="breadcrumb">
+          <li><a href="index.html">首页</a></li>
+          <li aria-current="page">社团活动</li>
+        </ol>
+      </nav>
+      <p class="eyebrow">Activities</p>
+      <h1 id="page-title">社团活动</h1>
+      <p class="lede ph-block">［页面导语］</p>
+    </div>
+  </section>
+
+  <!-- ============================== four programmes ============================== -->
+  <section class="section" aria-labelledby="programmes-title">
+    <div class="shell">
+      <div class="section-head reveal">
+        <p class="eyebrow">常规项目</p>
+        <h2 id="programmes-title">四条常年运行的线</h2>
+        <p>每个项目都有各自的节奏，你可以按自己的兴趣任选其一，也可以全都参加；具体安排以群消息为准。</p>
+      </div>
+
+      <div class="grid grid--2" data-stagger="90">
+        <article class="card reveal">
+          <span class="card__icon" aria-hidden="true"><svg><use href="#i-telescope"></use></svg></span>
+          <h3>路边天文夜</h3>
+          <p>
+            协会最日常的活动。在朝阳校区东区物理学院架设 3—4 台望远镜，
+            面向全校师生和附近居民开放。我们会安排一名讲解员轮流介绍当晚可见的目标，
+            从月面环形山到土星环。
+          </p>
+          <div class="card__meta">
+            <span><svg aria-hidden="true"><use href="#i-clock"></use></svg>关注群消息</span>
+            <span><svg aria-hidden="true"><use href="#i-pin"></use></svg>朝阳校区东区物理学院</span>
+            <span><svg aria-hidden="true"><use href="#i-users"></use></svg>开放参与</span>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon" aria-hidden="true"><svg><use href="#i-camera"></use></svg></span>
+          <h3>摄影工坊</h3>
+          <p>
+            社团成员拍摄的精美作品，大家共同欣赏并交流拍摄心得。
+          </p>
+          <div class="card__meta">
+            <span><svg aria-hidden="true"><use href="#i-pin"></use></svg>物理学院 713</span>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon" aria-hidden="true"><svg><use href="#i-book"></use></svg></span>
+          <h3>天文讲堂</h3>
+          <p>
+            不定期开展，主题从恒星演化、星系动力学到引力波与系外行星探测，
+            或是天文观测与古天文。
+          </p>
+          <div class="card__meta">
+            <span><svg aria-hidden="true"><use href="#i-clock"></use></svg>不定期开展</span>
+            <span><svg aria-hidden="true"><use href="#i-pin"></use></svg>物理学院 713</span>
+            <span><svg aria-hidden="true"><use href="#i-users"></use></svg>不限人数</span>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon" aria-hidden="true"><svg><use href="#i-globe"></use></svg></span>
+          <h3>星空观测营</h3>
+          <p>
+            每年一次的远途观测，通宵拍摄与目视观测。
+            出发前进行装备分配与安全说明，现场按小组划分观测区域，
+            次日清晨统一返程并整理观测记录归档。
+          </p>
+          <div class="card__meta">
+            <span><svg aria-hidden="true"><use href="#i-clock"></use></svg>每年一次</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== schedule ============================== -->
+  <section class="section section--tinted" id="schedule" aria-labelledby="schedule-title">
+    <div class="shell">
+      <div class="section-head reveal">
+        <p class="eyebrow">本学期日程</p>
+        <h2 id="schedule-title">活动排期</h2>
+        <p class="ph-block">［排期说明］</p>
+      </div>
+
+      <div class="log-wrap reveal">
+        <table class="log-table">
+          <caption>［学期排期表］</caption>
+          <thead>
+            <tr>
+              <th scope="col">日期</th>
+              <th scope="col">活动</th>
+              <th scope="col">负责小组</th>
+              <th scope="col">地点</th>
+              <th scope="col">观测 / 内容重点</th>
+              <th scope="col">参与方式</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr><td><span class="ph">［日期］</span></td><td><span class="ph">［活动］</span></td><td><span class="ph">［负责小组］</span></td><td><span class="ph">［地点］</span></td><td><span class="ph">［观测 / 内容重点］</span></td><td><span class="ph">［参与方式］</span></td></tr>
+          <tr><td><span class="ph">［日期］</span></td><td><span class="ph">［活动］</span></td><td><span class="ph">［负责小组］</span></td><td><span class="ph">［地点］</span></td><td><span class="ph">［观测 / 内容重点］</span></td><td><span class="ph">［参与方式］</span></td></tr>
+          <tr><td><span class="ph">［日期］</span></td><td><span class="ph">［活动］</span></td><td><span class="ph">［负责小组］</span></td><td><span class="ph">［地点］</span></td><td><span class="ph">［观测 / 内容重点］</span></td><td><span class="ph">［参与方式］</span></td></tr>
+          <tr><td><span class="ph">［日期］</span></td><td><span class="ph">［活动］</span></td><td><span class="ph">［负责小组］</span></td><td><span class="ph">［地点］</span></td><td><span class="ph">［观测 / 内容重点］</span></td><td><span class="ph">［参与方式］</span></td></tr>
+          <tr><td><span class="ph">［日期］</span></td><td><span class="ph">［活动］</span></td><td><span class="ph">［负责小组］</span></td><td><span class="ph">［地点］</span></td><td><span class="ph">［观测 / 内容重点］</span></td><td><span class="ph">［参与方式］</span></td></tr>
+          <tr><td><span class="ph">［日期］</span></td><td><span class="ph">［活动］</span></td><td><span class="ph">［负责小组］</span></td><td><span class="ph">［地点］</span></td><td><span class="ph">［观测 / 内容重点］</span></td><td><span class="ph">［参与方式］</span></td></tr>
+          <tr><td><span class="ph">［日期］</span></td><td><span class="ph">［活动］</span></td><td><span class="ph">［负责小组］</span></td><td><span class="ph">［地点］</span></td><td><span class="ph">［观测 / 内容重点］</span></td><td><span class="ph">［参与方式］</span></td></tr>
+          <tr><td><span class="ph">［日期］</span></td><td><span class="ph">［活动］</span></td><td><span class="ph">［负责小组］</span></td><td><span class="ph">［地点］</span></td><td><span class="ph">［观测 / 内容重点］</span></td><td><span class="ph">［参与方式］</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note mt-2 reveal">
+        <svg aria-hidden="true"><use href="#i-info"></use></svg>
+        <p class="ph-block">［天气与顺延预案说明］</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== observation log ============================== -->
+  <section class="section" aria-labelledby="log-title">
+    <div class="shell">
+      <div class="section-head reveal">
+        <p class="eyebrow">观测记录</p>
+        <h2 id="log-title">观测记录</h2>
+        <p class="ph-block">［观测记录的用途说明］</p>
+      </div>
+
+      <div class="log-wrap reveal">
+        <table class="log-table">
+          <caption>［观测记录表］</caption>
+          <thead>
+            <tr>
+              <th scope="col">日期</th>
+              <th scope="col">站点</th>
+              <th scope="col">目标</th>
+              <th scope="col">器材</th>
+              <th scope="col">累计曝光</th>
+              <th scope="col">天空条件</th>
+              <th scope="col">记录人</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr><td><span class="ph">［日期］</span></td><td><span class="ph">［站点］</span></td><td><span class="ph">［目标］</span></td><td><span class="ph">［器材］</span></td><td><span class="ph">［累计曝光］</span></td><td><span class="ph">［天空条件］</span></td><td><span class="ph">［记录人］</span></td></tr>
+          <tr><td><span class="ph">［日期］</span></td><td><span class="ph">［站点］</span></td><td><span class="ph">［目标］</span></td><td><span class="ph">［器材］</span></td><td><span class="ph">［累计曝光］</span></td><td><span class="ph">［天空条件］</span></td><td><span class="ph">［记录人］</span></td></tr>
+          <tr><td><span class="ph">［日期］</span></td><td><span class="ph">［站点］</span></td><td><span class="ph">［目标］</span></td><td><span class="ph">［器材］</span></td><td><span class="ph">［累计曝光］</span></td><td><span class="ph">［天空条件］</span></td><td><span class="ph">［记录人］</span></td></tr>
+          <tr><td><span class="ph">［日期］</span></td><td><span class="ph">［站点］</span></td><td><span class="ph">［目标］</span></td><td><span class="ph">［器材］</span></td><td><span class="ph">［累计曝光］</span></td><td><span class="ph">［天空条件］</span></td><td><span class="ph">［记录人］</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== a year in the club ============================== -->
+  <section class="section section--tinted" aria-labelledby="timeline-title">
+    <div class="shell">
+      <div class="split">
+        <div class="reveal">
+          <div class="section-head">
+            <p class="eyebrow">一年四季</p>
+            <h2 id="timeline-title">全年的观测节奏</h2>
+            <p class="ph-block">［季节节奏说明］</p>
+          </div>
+
+          <ol class="timeline">
+            <li>
+              <time datetime="YYYY-MM">［起止月份］</time>
+              <h3><span class="ph">［主题标题］</span></h3>
+              <p class="ph-block">［说明文字］</p>
+            </li>
+            <li>
+              <time datetime="YYYY-MM">［起止月份］</time>
+              <h3><span class="ph">［主题标题］</span></h3>
+              <p class="ph-block">［说明文字］</p>
+            </li>
+            <li>
+              <time datetime="YYYY-MM">［起止月份］</time>
+              <h3><span class="ph">［主题标题］</span></h3>
+              <p class="ph-block">［说明文字］</p>
+            </li>
+          </ol>
+        </div>
+
+        <figure class="frame reveal">
+          <img src="assets/img/milkyway-horizon.jpg"
+               srcset="assets/img/milkyway-horizon-900.jpg 900w, assets/img/milkyway-horizon-1400.jpg 1400w, assets/img/milkyway-horizon.jpg 2000w"
+               sizes="(max-width: 860px) 92vw, 44vw"
+               width="2000" height="1493" loading="lazy" decoding="async"
+               alt="［图片说明］">
+          <figcaption><span class="ph">［图片说明］</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== cta ============================== -->
+  <section class="section" aria-labelledby="act-cta-title">
+    <div class="shell">
+      <div class="cta reveal">
+        <p class="eyebrow eyebrow--center">怎么参加</p>
+        <h2 id="act-cta-title"><span class="ph">［标题］</span></h2>
+        <p class="ph-block">［参加方式说明］</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="index.html#join">
+            加入我们
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </a>
+          <a class="btn btn--ghost" href="gallery.html">先看看照片</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="CUST 理工天文 · 返回首页">
+        <span class="brand__mark" aria-hidden="true">
+          <picture>
+            <source type="image/webp" srcset="assets/img/aac-badge-96.webp 1x, assets/img/aac-badge-192.webp 2x">
+            <img src="assets/img/aac-badge-96.png"
+                 srcset="assets/img/aac-badge-96.png 1x, assets/img/aac-badge-192.png 2x"
+                 width="34" height="34" alt="" decoding="async">
+          </picture>
+        </span>
+        <span class="brand__text">
+          <span class="brand__name">CUST 理工天文</span>
+          <span class="brand__sub">Astronomical Association of CUST</span>
+        </span>
+      </a>
+        <p>成立于 2004 年 3 月 15 日，一个由学生自主运营的天文社团。抬头看星星这件事，我们希望有更多人一起做。</p>
+      </div>
+
+      <div class="footer-col">
+        <h2>浏览</h2>
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="activities.html">社团活动</a></li>
+          <li><a href="gallery.html">星空画廊</a></li>
+          <li><a href="about.html">关于我们</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>参与</h2>
+        <ul>
+          <li><a href="index.html#join">加入我们</a></li>
+          <li><a href="activities.html#schedule">本学期日程</a></li>
+          <li><a href="index.html#contact">联系方式</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>联络</h2>
+        <ul>
+          <li>QQ 群 884842421</li>
+          <li><a href="mailto:xintao@mails.cust.edu.cn">xintao@mails.cust.edu.cn</a></li>
+          <li>公众号：东北亚皇家理工天文</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>©<span data-year hidden></span> CUST 理工天文 · 本站照片均由社团成员拍摄</p>
+      <p>网站设计&amp;运营：王鑫涛</p>
+      <p>Built with plain HTML &amp; CSS</p>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" type="button" aria-label="回到顶部">
+  <svg aria-hidden="true"><use href="#i-arrow-up"></use></svg>
+</button>
+
+<p class="visually-hidden" id="theme-live" role="status" aria-live="polite"></p>
+
+<dialog class="notice" data-notice aria-labelledby="notice-title" aria-describedby="notice-body">
+  <div class="notice__inner">
+    <p class="chip chip--brand">测试阶段</p>
+    <h2 class="notice__title" id="notice-title">本站仍在完善中</h2>
+
+    <div class="notice__body" id="notice-body">
+      <p>
+        当前网站属于测试阶段：图片尚未完成筛选与上传，页面内容也仍在设计调整中。
+        因此你看到的内容可能随时变化，有缺失或不当之处还请见谅。
+      </p>
+      <ul class="notice__links">
+        <li>
+          <span class="notice__links-label">临时测试站点</span>
+          <a href="https://astra.xintao.fun" rel="noopener">astra.xintao.fun</a>
+        </li>
+        <li>
+          <span class="notice__links-label">正式站点（迁移后）</span>
+          <a href="https://www.astracust.cn" rel="noopener">www.astracust.cn</a>
+        </li>
+      </ul>
+    </div>
+
+    <form method="dialog" class="notice__actions">
+      <button class="btn btn--primary" value="dismiss">我知道了</button>
+    </form>
+  </div>
+</dialog>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
