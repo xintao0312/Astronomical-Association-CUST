@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CUST 理工天文 · 把夜空读给你听</title>
 <meta name="description" content="CUST 理工天文 — 长春理工大学的星空爱好者社群。路边天文夜、摄影工坊、天文讲堂与星空观测营，从校园到野外观测站点。">
-<meta name="theme-color" content="#eef4ff">
+<meta name="theme-color" content="#06070f">
 <meta name="color-scheme" content="light dark">
 
 <meta property="og:type" content="website">
@@ -24,6 +24,8 @@
   try { t = localStorage.getItem("cust-astro-theme"); } catch (e) {}
   if (t !== "light" && t !== "dark") t = "dark";
   document.documentElement.setAttribute("data-theme", t);
+  var m = document.querySelector('meta[name="theme-color"]');
+  if (m) m.setAttribute("content", t === "dark" ? "#06070f" : "#eef4ff");
 })();
 </script>
 <style>
@@ -199,8 +201,8 @@
     </nav>
 
     <div class="nav-actions">
-      <button class="theme-toggle" type="button" data-theme-toggle data-active="light"
-              aria-label="切换到暗色模式" aria-pressed="false">
+      <button class="theme-toggle" type="button" data-theme-toggle data-active="dark"
+              aria-label="切换到亮色模式" aria-pressed="true">
         <span class="theme-toggle__thumb" aria-hidden="true"></span>
         <span class="theme-toggle__opt" aria-hidden="true"><svg><use href="#i-sun"></use></svg></span>
         <span class="theme-toggle__opt" aria-hidden="true"><svg><use href="#i-moon"></use></svg></span>

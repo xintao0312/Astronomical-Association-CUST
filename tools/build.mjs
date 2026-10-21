@@ -39,6 +39,8 @@ const THEME_BOOT = `(function () {
   try { t = localStorage.getItem("cust-astro-theme"); } catch (e) {}
   if (t !== "light" && t !== "dark") t = "dark";
   document.documentElement.setAttribute("data-theme", t);
+  var m = document.querySelector('meta[name="theme-color"]');
+  if (m) m.setAttribute("content", t === "dark" ? "#06070f" : "#eef4ff");
 })();`;
 
 /** The club badge (image/aaclogo1.png). One image; dark mode inverts it in CSS. */
@@ -84,8 +86,8 @@ function header(activeKey) {
 ${nav(activeKey)}
 
     <div class="nav-actions">
-      <button class="theme-toggle" type="button" data-theme-toggle data-active="light"
-              aria-label="切换到暗色模式" aria-pressed="false">
+      <button class="theme-toggle" type="button" data-theme-toggle data-active="dark"
+              aria-label="切换到亮色模式" aria-pressed="true">
         <span class="theme-toggle__thumb" aria-hidden="true"></span>
         <span class="theme-toggle__opt" aria-hidden="true"><svg><use href="#i-sun"></use></svg></span>
         <span class="theme-toggle__opt" aria-hidden="true"><svg><use href="#i-moon"></use></svg></span>
@@ -198,13 +200,13 @@ function shell(page) {
     : "";
 
   return `<!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${page.title}</title>
 <meta name="description" content="${page.description}">
-<meta name="theme-color" content="#eef4ff">
+<meta name="theme-color" content="#06070f">
 <meta name="color-scheme" content="light dark">
 
 <meta property="og:type" content="website">
