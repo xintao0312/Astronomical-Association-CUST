@@ -6,13 +6,15 @@
 // 每张照片的字段：
 //   key    资源文件名前缀（assets/img/<key>-900.jpg 等），同时是取用的标识
 //   title  作品标题（图说与灯箱共用）
+//   year   拍摄年份（数字），画廊按它分组；不知道的留空
 //   place  拍摄地（行政区 + 地名）；深空／月食这类没有地点的不填
 //   note   时间或类别，如 "2024 年 5 月 3 日"、"深空天体摄影"
 //   alt    给读屏软件的画面描述，必须写清楚画面内容
 //   focus  裁切时保留的部位，对应 CSS 的 object-position
 //   widths 已生成的宽度档位，必须与 tools/optimize_images.py 的 PHOTO_WIDTHS 一致
 //
-// 数组顺序 = 画廊里的展示顺序，按拍摄地分组。
+// 数组顺序只影响「同一年、同一地点」内部的先后；画廊会按 year 分组、
+// 组内把同地点的照片排在一起。
 
 const XIANGHAI = "吉林省白城市通榆县向海自然保护区";
 const HALAHAI = "吉林省长春市农安县哈拉海镇";
@@ -54,6 +56,7 @@ export const SHOTS = [
   {
     key: "hala-1",
     title: "银河升起",
+    year: 2024,
     place: HALAHAI,
     note: "2024 年 10 月 11 日",
     focus: "center 48%",
@@ -63,10 +66,21 @@ export const SHOTS = [
   {
     key: "hala-2",
     title: "树影与星河",
+    year: 2024,
     place: HALAHAI,
     note: "2024 年 10 月 11 日",
     focus: "center 45%",
     alt: "哈拉海镇的银河横贯夜空，右侧是树的剪影",
+    widths: W,
+  },
+  {
+    key: "hala-aurora",
+    title: "原野尽头的极光",
+    year: 2024,
+    place: HALAHAI,
+    note: "2024 年 10 月 11 日",
+    focus: "center 55%",
+    alt: "哈拉海的原野上空，粉红色的极光贴着地平线漫开，银河斜贯其上，前景是草丛与树的剪影",
     widths: W,
   },
 
@@ -74,6 +88,7 @@ export const SHOTS = [
   {
     key: "outdoor-1",
     title: "水库上空的银河",
+    year: 2025,
     place: SHUIKU,
     note: "2025 年 5 月 2 日",
     focus: "center 50%",
@@ -83,6 +98,7 @@ export const SHOTS = [
   {
     key: "outdoor-2",
     title: "水面上的星光",
+    year: 2025,
     place: SHUIKU,
     note: "2025 年 5 月 2 日",
     focus: "center 50%",
@@ -92,6 +108,7 @@ export const SHOTS = [
   {
     key: "group-outdoor",
     title: "野外观测合影",
+    year: 2025,
     place: SHUIKU,
     note: "2025 年 5 月 2 日",
     focus: "center 32%",
@@ -105,6 +122,7 @@ export const SHOTS = [
   {
     key: "milkyway-horizon",
     title: "山脊上的银河",
+    year: 2024,
     place: LIANHUASHAN,
     note: "2024 年 5 月 3 日",
     focus: "center 50%",
@@ -114,6 +132,7 @@ export const SHOTS = [
   {
     key: "milkyway-wide",
     title: "莲花山的银河",
+    year: 2024,
     place: LIANHUASHAN,
     note: "2024 年 5 月 3 日",
     focus: "center 45%",
@@ -123,6 +142,7 @@ export const SHOTS = [
   {
     key: "milkyway-camp",
     title: "营地上的星空",
+    year: 2024,
     place: LIANHUASHAN,
     note: "2024 年 5 月 3 日",
     focus: "center 46%",
@@ -134,6 +154,7 @@ export const SHOTS = [
   {
     key: "eclipse",
     title: "月影流辉",
+    year: 2025,
     note: "2025 年 9 月 8 日",
     focus: "center 50%",
     alt: "月全食特写，月面呈暗红色，边缘带一圈较亮的光",
@@ -145,6 +166,15 @@ export const SHOTS = [
     note: "深空天体摄影",
     focus: "center 50%",
     alt: "NGC 6888 新月星云，红色的丝状气壳嵌在密集星场中",
+    widths: W,
+  },
+  {
+    key: "moon-full",
+    title: "满月",
+    year: 2024,
+    note: "2024 年 11 月 16 日",
+    focus: "center 50%",
+    alt: "满月特写，月面几乎全部被照亮，环形山的辐射纹与深色月海清晰可见",
     widths: W,
   },
 ];

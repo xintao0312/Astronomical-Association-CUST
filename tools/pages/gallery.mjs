@@ -1,10 +1,10 @@
 // Gallery page content.
 //
 // 照片数据不在这里 —— 全部来自 ../photos.mjs（全站唯一数据源）。
-// 改标题、地点、时间、alt 请改那个文件，画廊与首页会同步更新。
+// 改标题、地点、时间、alt、年份请改那个文件，画廊与首页会同步更新。
 //
-// 网格是两列等大的 4:3 方格（见 assets/css/main.css 的 .shot），13 张照片
-// 全部为横向构图（1.30—1.51），裁切极小。数组顺序即展示顺序。
+// 版式：按拍摄年份折叠分组（<details>，默认全部展开），
+// 组内把同一拍摄地的照片排在一起；两列等大的 4:3 方格（见 .shot）。
 
 import { SHOTS, photoFiles, photoSrcset, photoMeta } from "../photos.mjs";
 
@@ -21,28 +21,83 @@ function figure(shot, index) {
   const metaRow = meta
     ? `<span class="shot__meta">${pin}${meta}</span>`
     : "";
-  return `        <figure class="shot reveal" data-full="${files.full}"
-                  data-full-srcset="${files.fullSrcset}"
-                  data-title="${shot.title}" data-desc="${meta}"
-                  tabindex="0" role="button" aria-labelledby="${id}-cap"
-                  aria-label="放大查看：${label}">
-          <img src="${files.thumb}"
-               srcset="${photoSrcset(shot)}"
-               sizes="(max-width: 860px) 92vw, 47vw"
-               style="object-position: ${shot.focus || "center"}"
-               loading="lazy" decoding="async"
-               alt="${shot.alt}">
-          <figcaption class="shot__caption" id="${id}-cap">
-            <span class="shot__text">
-              <span class="shot__title">${shot.title}</span>
-              ${metaRow}
-            </span>
-            <span class="shot__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
-          </figcaption>
-        </figure>`;
+  return `          <figure class="shot reveal" data-full="${files.full}"
+                    data-full-srcset="${files.fullSrcset}"
+                    data-title="${shot.title}" data-desc="${meta}"
+                    tabindex="0" role="button" aria-labelledby="${id}-cap"
+                    aria-label="放大查看：${label}">
+            <img src="${files.thumb}"
+                 srcset="${photoSrcset(shot)}"
+                 sizes="(max-width: 860px) 92vw, 47vw"
+                 style="object-position: ${shot.focus || "center"}"
+                 loading="lazy" decoding="async"
+                 alt="${shot.alt}">
+            <figcaption class="shot__caption" id="${id}-cap">
+              <span class="shot__text">
+                <span class="shot__title">${shot.title}</span>
+                ${metaRow}
+              </span>
+              <span class="shot__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
+            </figcaption>
+          </figure>`;
 }
 
-const grid = SHOTS.map(figure).join("\n");
+/** 按 year 分组；组内再按 place 分组，保证同一地点的照片相邻。 */
+function groupShots(shots) {
+  const years = new Map();
+  for (const shot of shots) {
+    const key = shot.year ?? null;
+    if (!years.has(key)) years.set(key, []);
+    years.get(key).push(shot);
+  }
+
+  // 年份从新到旧，没有年份的排在最后
+  const keys = [...years.keys()].sort((a, b) => {
+    if (a === null) return 1;
+    if (b === null) return -1;
+    return b - a;
+  });
+
+  return keys.map((year) => {
+    const group = years.get(year);
+    // 同一地点聚合，地点顺序按首次出现；没有地点的（深空、月食）放组末
+    const places = new Map();
+    for (const shot of group) {
+      const key = shot.place ?? "\u0000";
+      if (!places.has(key)) places.set(key, []);
+      places.get(key).push(shot);
+    }
+    const sorted = [...places.entries()]
+      .sort((a, b) => (a[0] === "\u0000" ? 1 : b[0] === "\u0000" ? -1 : 0))
+      .flatMap(([, list]) => list);
+    return { year, shots: sorted, size: sorted.length };
+  });
+}
+
+let counter = 0;
+
+function yearGroup({ year, shots, size }) {
+  const inner = shots.map((s) => figure(s, counter++)).join("\n\n");
+  const label = year === null ? "年份待补" : `${year} 年`;
+  const summaryNote =
+    year === null ? `${size} 张 · 待补充拍摄年份` : `${size} 张`;
+  return `        <details class="year-group reveal" open>
+          <summary class="year-group__head">
+            <span class="year-group__label">${label}</span>
+            <span class="year-group__count">${summaryNote}</span>
+            <span class="year-group__chevron" aria-hidden="true">
+              <svg><use href="#i-chevron-right"></use></svg>
+            </span>
+          </summary>
+
+          <div class="gallery-grid" data-stagger="70">
+${inner}
+          </div>
+        </details>`;
+}
+
+const groups = groupShots(SHOTS);
+
 
 
 export default {
@@ -90,8 +145,8 @@ export default {
         </p>
       </div>
 
-      <div class="gallery-grid" data-gallery data-stagger="80">
-${grid}
+      <div class="gallery-years" data-gallery>
+${groups.map(yearGroup).join("\n\n")}
       </div>
     </div>
   </section>
