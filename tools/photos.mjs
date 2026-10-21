@@ -7,19 +7,34 @@
 //   key    资源文件名前缀（assets/img/<key>-900.jpg 等），同时是取用的标识
 //   title  作品标题（图说与灯箱共用）
 //   year   拍摄年份（数字），画廊按它分组；不知道的留空
+//   group  专属分组名（如 "星空毕业典礼"）。填了就不再并入年份分组
+//   groupNote 专属分组标题右侧的补充说明（如 "2022 级"）
 //   place  拍摄地（行政区 + 地名）；深空／月食这类没有地点的不填
 //   note   时间或类别，如 "2024 年 5 月 3 日"、"深空天体摄影"
 //   alt    给读屏软件的画面描述，必须写清楚画面内容
 //   focus  裁切时保留的部位，对应 CSS 的 object-position
 //   widths 已生成的宽度档位，必须与 tools/optimize_images.py 的 PHOTO_WIDTHS 一致
 //
-// 数组顺序只影响「同一年、同一地点」内部的先后；画廊会按 year 分组、
-// 组内把同地点的照片排在一起。
+// 数组顺序不影响展示顺序：画廊按 year 分组，组内把同地点的照片排在一起，
+// 地点之间、以及地点内部都按 note 里的日期从早到晚排。
+//
+// 拍摄时间统一取**素材所在文件夹名**的日期（如 20240330吉林省… → 2024-03-30）。
+// 不用文件名里的时间戳 —— 修图软件导出（MTXX_ 前缀）、相机时钟偏差、
+// 后期另存都可能把它覆盖掉，逐张判断反而容易错。
+// 没有文件夹的素材（早期的 aac*.jpg、2025野外观测*.jpg 等）日期由人工确认后填写。
 
 const XIANGHAI = "吉林省白城市通榆县向海自然保护区";
 const HALAHAI = "吉林省长春市农安县哈拉海镇";
 const SHUIKU = "吉林省吉林市永吉县岔路河镇星星哨水库";
 const LIANHUASHAN = "吉林省吉林市磐石市烟筒山镇官马莲花山";
+const XINSHAN = "吉林省四平市伊通县新山水库";
+const CHAERSHEN = "内蒙古兴安盟科尔沁右翼前旗察尔森水库";
+const MENGSHUIHE = "内蒙古兴安盟阿尔山市明水河镇";
+const DIJIAOZI = "内蒙古兴安盟阿尔山市明水河镇下地窖子";
+const DAJIANGGANG = "吉林省四平市伊通县河源镇大酱缸村";
+const ERDAO = "吉林省延边州安图县二道白河镇";
+const YITONGHE = "吉林省长春市南关区伊通河";
+const SHUANGSHAN = "吉林省四平市双辽市双山镇北傅街";
 
 const W = [900, 1400, 2000];
 
@@ -150,14 +165,353 @@ export const SHOTS = [
     widths: W,
   },
 
+  // ---------- 2023 年 · 伊通新山水库 ----------
+  {
+    key: "xinshan-1",
+    title: "树梢上的初星",
+    year: 2023,
+    place: XINSHAN,
+    note: "2023 年 3 月 26 日",
+    focus: "center 45%",
+    alt: "新山水库边的暮色里，树木成了剪影，天顶亮起几颗早出的星，地平线还留着一层暖光",
+    widths: W,
+  },
+  {
+    key: "xinshan-2",
+    title: "水库边的夜路",
+    year: 2023,
+    place: XINSHAN,
+    note: "2023 年 3 月 26 日",
+    focus: "center 55%",
+    alt: "新山水库边的道路，尽头是地平线上城市的灯光，头顶已经能看见星星",
+    widths: W,
+  },
+  {
+    key: "xinshan-3",
+    title: "把背影留给银河",
+    year: 2023,
+    place: XINSHAN,
+    note: "2023 年 3 月 26 日",
+    focus: "center 50%",
+    alt: "新山水库的星空下，四五个人背对镜头站着，中间一盏强光把人与前景照得发白、边缘晕开，天上的星点虚成柔光，右侧地平线留着一层橙色的光",
+    widths: W,
+  },
+  {
+    key: "xinshan-4",
+    title: "湖岸的暮色",
+    year: 2023,
+    place: XINSHAN,
+    note: "2023 年 3 月 26 日",
+    focus: "center 50%",
+    alt: "新山水库的湖岸，树影与远处的灯光，天空还留着从蓝到暖的暮色渐变",
+    widths: W,
+  },
+
+  // ---------- 2023 年 · 察尔森水库 ----------
+  {
+    key: "chaershen-1",
+    title: "田埂与星夜",
+    year: 2023,
+    place: CHAERSHEN,
+    note: "2023 年 4 月 29 日",
+    focus: "center 50%",
+    alt: "察尔森水库旁的田埂，一道车灯从左下斜着打向夜空，天上稀疏地亮着几颗星",
+    widths: W,
+  },
+
+  // ---------- 2023 年 · 阿尔山明水河镇 ----------
+  {
+    key: "mingshuihe-1",
+    title: "明水河的银河",
+    year: 2023,
+    place: MENGSHUIHE,
+    note: "2023 年 5 月 21 日",
+    focus: "center 50%",
+    alt: "明水河镇上空，银河的核心区横贯画面，暗尘带与明亮的部分层次分明",
+    widths: W,
+  },
+
+  // ---------- 2023 年 · 明水河镇下地窖子 ----------
+  {
+    key: "dijiaozi-1",
+    title: "营地外的银河",
+    year: 2023,
+    place: DIJIAOZI,
+    note: "2023 年 6 月 23 日",
+    focus: "center 50%",
+    alt: "下地窖子的山脊上方，银河斜贯夜空，远处地平线有一小片暖色的光",
+    widths: W,
+  },
+  {
+    key: "dijiaozi-2",
+    title: "帐篷里的暖光",
+    year: 2023,
+    place: DIJIAOZI,
+    note: "2023 年 6 月 23 日",
+    focus: "center 50%",
+    alt: "夜色里的营地，一顶帐篷透出暖黄的灯光，旁边还搭着两顶帐篷，天空是深蓝的星夜",
+    widths: W,
+  },
+  {
+    key: "dijiaozi-3",
+    title: "雷雨中的营地",
+    year: 2023,
+    place: DIJIAOZI,
+    note: "2023 年 6 月 23 日",
+    focus: "center 45%",
+    alt: "营地上方的夜空被闪电照亮，几道枝状闪电横过云层，帐篷在暗处只留下轮廓",
+    widths: W,
+  },
+  {
+    key: "dijiaozi-4",
+    title: "头顶的银河",
+    year: 2023,
+    place: DIJIAOZI,
+    note: "2023 年 6 月 23 日",
+    focus: "center 50%",
+    alt: "下地窖子营地的正上方，银河从头顶铺开，画面里满是密集的星点",
+    widths: W,
+  },
+  {
+    key: "dijiaozi-5",
+    title: "山脊与星空",
+    year: 2023,
+    place: DIJIAOZI,
+    note: "2023 年 6 月 23 日",
+    focus: "center 50%",
+    alt: "山脊的剪影之上是满天的星，低空浮着一层淡淡的光晕",
+    widths: W,
+  },
+  {
+    key: "dijiaozi-6",
+    title: "扎营的夜晚",
+    year: 2023,
+    place: DIJIAOZI,
+    note: "2023 年 6 月 23 日",
+    focus: "center 50%",
+    alt: "两顶帐篷扎在星空下，一个人戴着照明头灯站在中间，天空是深蓝的星夜",
+    widths: W,
+  },
+
+  // ---------- 2024 年 · 伊通大酱缸村 ----------
+  {
+    key: "dajianggang-1",
+    title: "地平线上的亮星",
+    year: 2024,
+    place: DAJIANGGANG,
+    note: "2024 年 3 月 30 日",
+    focus: "center 55%",
+    alt: "大酱缸村外的夜空，一颗很亮的星悬在地平线的光晕上方，左侧是树的剪影",
+    widths: W,
+  },
+  {
+    key: "dajianggang-2",
+    title: "屋檐上的星轨",
+    year: 2024,
+    place: DAJIANGGANG,
+    note: "2024 年 3 月 30 日",
+    focus: "center 50%",
+    alt: "大酱缸村的屋舍上方，星轨在长曝光里拉成弧线，屋里透出暖黄色的灯光",
+    widths: W,
+  },
+  {
+    key: "dajianggang-3",
+    title: "村口的星空",
+    year: 2024,
+    place: DAJIANGGANG,
+    note: "2024 年 3 月 30 日",
+    focus: "center 45%",
+    alt: "大酱缸村口，树影映在星空下，地面只剩微弱的轮廓",
+    widths: W,
+  },
+
+  // ---------- 2024 年 · 安图二道白河镇 ----------
+  {
+    key: "erdao-1",
+    title: "镇外的夜空",
+    year: 2024,
+    place: ERDAO,
+    note: "2024 年 11 月 10 日",
+    focus: "center 50%",
+    alt: "二道白河镇外，地平线泛着微光，树木在星空下成为剪影，地面被微弱的光照亮",
+    widths: W,
+  },
+  {
+    key: "erdao-2",
+    title: "村里升起的银河",
+    year: 2024,
+    place: ERDAO,
+    note: "2024 年 11 月 10 日",
+    focus: "center 50%",
+    alt: "二道白河镇的夜空，银河从屋舍与路灯上方升起，云层被灯光照出轮廓",
+    widths: W,
+  },
+
+  // ---------- 星空毕业典礼 · 2022 级（专属分组，不并入年份）----------
+  {
+    key: "grad-1",
+    title: "学士服与星河",
+    year: 2026,
+    group: "星空毕业典礼",
+    groupNote: "2022 级",
+    place: SHUANGSHAN,
+    note: "2026 年 6 月 18 日",
+    focus: "center 50%",
+    alt: "一位穿学士服的毕业生背对镜头站在银河下，左侧是电杆与电线，天际泛着淡淡的紫光",
+    widths: W,
+  },
+  {
+    key: "grad-2",
+    title: "一束绿光",
+    year: 2026,
+    group: "星空毕业典礼",
+    groupNote: "2022 级",
+    place: SHUANGSHAN,
+    note: "2026 年 6 月 18 日",
+    focus: "center 50%",
+    alt: "毕业生举着绿色激光笔，光柱笔直射向银河，人在画面中央成剪影",
+    widths: W,
+  },
+  {
+    key: "grad-3",
+    title: "抬头的瞬间",
+    year: 2026,
+    group: "星空毕业典礼",
+    groupNote: "2022 级",
+    place: SHUANGSHAN,
+    note: "2026 年 6 月 18 日",
+    focus: "center 45%",
+    alt: "穿学士服的毕业生仰头望向银河，银河从头顶斜贯而过，背景是夜空与远处的屋脊",
+    widths: W,
+  },
+  {
+    key: "grad-4",
+    title: "指向星空",
+    year: 2026,
+    group: "星空毕业典礼",
+    groupNote: "2022 级",
+    place: SHUANGSHAN,
+    note: "2026 年 6 月 18 日",
+    focus: "center 50%",
+    alt: "毕业生侧身举起绿色激光笔，光柱斜指银河，右侧是电杆与树的剪影",
+    widths: W,
+  },
+  {
+    key: "grad-5",
+    title: "银河之下",
+    year: 2026,
+    group: "星空毕业典礼",
+    groupNote: "2022 级",
+    place: SHUANGSHAN,
+    note: "2026 年 6 月 18 日",
+    focus: "center 50%",
+    alt: "毕业生站在画面中央，身后是横贯天空的银河，人物被夜色压成剪影",
+    widths: W,
+  },
+  {
+    key: "grad-6",
+    title: "学位帽的影子",
+    year: 2026,
+    group: "星空毕业典礼",
+    groupNote: "2022 级",
+    place: SHUANGSHAN,
+    note: "2026 年 6 月 18 日",
+    focus: "center 48%",
+    alt: "毕业生的学位帽与披肩在星空前显出轮廓，右侧是屋脊与电杆的剪影",
+    widths: W,
+  },
+  {
+    key: "grad-7",
+    title: "夜色里的毕业生",
+    year: 2026,
+    group: "星空毕业典礼",
+    groupNote: "2022 级",
+    place: SHUANGSHAN,
+    note: "2026 年 6 月 18 日",
+    focus: "center 50%",
+    alt: "一位毕业生侧身立在银河下，长袍的轮廓清晰，四周是小镇屋顶的剪影",
+    widths: W,
+  },
+  {
+    key: "grad-8",
+    title: "横幅展开",
+    year: 2026,
+    group: "星空毕业典礼",
+    groupNote: "2022 级",
+    place: SHUANGSHAN,
+    note: "2026 年 6 月 18 日",
+    focus: "center 50%",
+    alt: "两个人一起举起一条蓝色横幅，头顶是斜贯夜空的银河",
+    widths: W,
+  },
+  {
+    key: "grad-9",
+    title: "我们毕业了",
+    year: 2026,
+    group: "星空毕业典礼",
+    groupNote: "2022 级",
+    place: SHUANGSHAN,
+    note: "2026 年 6 月 18 日",
+    focus: "center 50%",
+    alt: "五六位同学并肩站成一排，共同举着蓝色横幅，银河从他们头顶斜过",
+    widths: W,
+  },
+  {
+    key: "grad-10",
+    title: "光束越过小镇",
+    year: 2026,
+    group: "星空毕业典礼",
+    groupNote: "2022 级",
+    place: SHUANGSHAN,
+    note: "2026 年 6 月 18 日",
+    focus: "center 50%",
+    alt: "毕业生举着绿色激光笔站在电杆旁，光柱越过屋顶指向夜空，银河在右上方",
+    widths: W,
+  },
+  {
+    key: "grad-11",
+    title: "绿光与星野",
+    year: 2026,
+    group: "星空毕业典礼",
+    groupNote: "2022 级",
+    place: SHUANGSHAN,
+    note: "2026 年 6 月 18 日",
+    focus: "center 50%",
+    alt: "绿色光柱斜着划过星空，一位毕业生低头站在画面中间，旁边还有人蹲着",
+    widths: W,
+  },
+  {
+    key: "grad-12",
+    title: "星空毕业合影",
+    year: 2026,
+    group: "星空毕业典礼",
+    groupNote: "2022 级",
+    place: SHUANGSHAN,
+    note: "2026 年 6 月 18 日",
+    focus: "center 45%",
+    alt: "一群毕业生在轿车旁合影，手里举着蓝色横幅，头顶是横贯夜空的银河",
+    widths: W,
+  },
+
   // ---------- 其他作品 ----------
   {
     key: "eclipse",
     title: "月影流辉",
     year: 2025,
+    place: YITONGHE,
     note: "2025 年 9 月 8 日",
     focus: "center 50%",
     alt: "月全食特写，月面呈暗红色，边缘带一圈较亮的光",
+    widths: W,
+  },
+  {
+    key: "eclipse-river",
+    title: "夜空里的红月",
+    year: 2025,
+    place: YITONGHE,
+    note: "2025 年 9 月 8 日",
+    focus: "center 50%",
+    alt: "伊通河畔的夜空，一枚暗红的月亮悬在画面中间，四周散着稀疏的星点，月面下缘留着一道明亮的边缘",
     widths: W,
   },
   {

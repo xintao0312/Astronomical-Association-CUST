@@ -42,50 +42,96 @@ function figure(shot, index) {
           </figure>`;
 }
 
-/** 按 year 分组；组内再按 place 分组，保证同一地点的照片相邻。 */
+/** 把 note 里的中文日期转成可排序的键；没有日期的排到最后。 */
+function dateKey(shot) {
+  const full = /(\d{4}) 年 (\d{1,2}) 月 (\d{1,2}) 日/.exec(shot.note ?? "");
+  if (full) {
+    return `${full[1]}-${full[2].padStart(2, "0")}-${full[3].padStart(2, "0")}`;
+  }
+  const yearOnly = /(\d{4}) 年/.exec(shot.note ?? "");
+  if (yearOnly) return `${yearOnly[1]}-00-00`;
+  return "9999-99-99";
+}
+
+/** 组内排序：先按拍摄地聚合，地点之间与地点内部都按时间先后。 */
+function sortWithin(group) {
+  const places = new Map();
+  for (const shot of group) {
+    const key = shot.place ?? "\u0000";
+    if (!places.has(key)) places.set(key, []);
+    places.get(key).push(shot);
+  }
+  return [...places.values()]
+    .map((list) => list.slice().sort((a, b) => dateKey(a).localeCompare(dateKey(b))))
+    .sort((a, b) => dateKey(a[0]).localeCompare(dateKey(b[0])))
+    .flat();
+}
+
+/**
+ * 分组规则：
+ *   1. 带 `group` 字段的照片进**专属分组**（如「星空毕业典礼」），不并入年份，
+ *      按在数据里的出现顺序排在所有年份分组之前
+ *   2. 其余按 `year` 分组，年份从新到旧，没有年份的排最后
+ *   3. 每组内部按 sortWithin() 排序
+ */
 function groupShots(shots) {
+  const specials = [];
+  const specialIndex = new Map();
   const years = new Map();
+
   for (const shot of shots) {
+    if (shot.group) {
+      if (!specialIndex.has(shot.group)) {
+        specialIndex.set(shot.group, {
+          label: shot.group,
+          note: shot.groupNote ?? "",
+          shots: [],
+        });
+        specials.push(shot.group);
+      }
+      specialIndex.get(shot.group).shots.push(shot);
+      continue;
+    }
     const key = shot.year ?? null;
     if (!years.has(key)) years.set(key, []);
     years.get(key).push(shot);
   }
 
-  // 年份从新到旧，没有年份的排在最后
-  const keys = [...years.keys()].sort((a, b) => {
+  const yearKeys = [...years.keys()].sort((a, b) => {
     if (a === null) return 1;
     if (b === null) return -1;
     return b - a;
   });
 
-  return keys.map((year) => {
-    const group = years.get(year);
-    // 同一地点聚合，地点顺序按首次出现；没有地点的（深空、月食）放组末
-    const places = new Map();
-    for (const shot of group) {
-      const key = shot.place ?? "\u0000";
-      if (!places.has(key)) places.set(key, []);
-      places.get(key).push(shot);
-    }
-    const sorted = [...places.entries()]
-      .sort((a, b) => (a[0] === "\u0000" ? 1 : b[0] === "\u0000" ? -1 : 0))
-      .flatMap(([, list]) => list);
-    return { year, shots: sorted, size: sorted.length };
+  const specialGroups = specials.map((name) => {
+    const g = specialIndex.get(name);
+    const sorted = sortWithin(g.shots);
+    return { label: g.label, note: g.note, shots: sorted, size: sorted.length };
   });
+
+  const yearGroups = yearKeys.map((year) => {
+    const sorted = sortWithin(years.get(year));
+    return {
+      label: year === null ? "年份待补" : `${year} 年`,
+      note: year === null ? "待补充拍摄年份" : "",
+      shots: sorted,
+      size: sorted.length,
+    };
+  });
+
+  return [...specialGroups, ...yearGroups];
 }
 
 let counter = 0;
 
-function yearGroup({ year, shots, size }) {
+function photoGroup({ label, note, shots, size }) {
   const inner = shots.map((s) => figure(s, counter++)).join("\n\n");
-  const label = year === null ? "年份待补" : `${year} 年`;
-  const summaryNote =
-    year === null ? `${size} 张 · 待补充拍摄年份` : `${size} 张`;
-  return `        <details class="year-group reveal" open>
-          <summary class="year-group__head">
-            <span class="year-group__label">${label}</span>
-            <span class="year-group__count">${summaryNote}</span>
-            <span class="year-group__chevron" aria-hidden="true">
+  const summaryNote = note ? `${size} 张 · ${note}` : `${size} 张`;
+  return `        <details class="photo-group reveal" open>
+          <summary class="photo-group__head">
+            <span class="photo-group__label">${label}</span>
+            <span class="photo-group__count">${summaryNote}</span>
+            <span class="photo-group__chevron" aria-hidden="true">
               <svg><use href="#i-chevron-right"></use></svg>
             </span>
           </summary>
@@ -95,7 +141,6 @@ ${inner}
           </div>
         </details>`;
 }
-
 const groups = groupShots(SHOTS);
 
 
@@ -104,7 +149,7 @@ export default {
   nav: "gallery",
   title: "星空画廊 · CUST 理工天文",
   description:
-    "CUST 理工天文成员拍摄的星空作品：向海自然保护区的银河与极光、星星哨水库的野外观测、官马莲花山的银河，以及月食与深空天体摄影。",
+    "CUST 理工天文成员拍摄的星空作品：从 2023 年到 2025 年，吉林与内蒙古各地的银河、极光、月食与深空天体摄影，按年份分组。",
   content: `
   <!-- ============================== page head ============================== -->
   <section class="page-head page-head--photo" aria-labelledby="page-title">
@@ -146,7 +191,7 @@ export default {
       </div>
 
       <div class="gallery-years" data-gallery>
-${groups.map(yearGroup).join("\n\n")}
+${groups.map(photoGroup).join("\n\n")}
       </div>
     </div>
   </section>

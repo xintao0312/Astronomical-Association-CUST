@@ -905,26 +905,27 @@
     inset 0 -40px 60px -40px rgba(4, 8, 20, 0.5);
 }
 
-/* --------------------------- 按年折叠分组 ------------------------------ */
+/* ------------------------- 可折叠的照片分组 ---------------------------- */
 
 /* 用原生 <details>：可折叠、可用键盘操作，且禁用 JS 时依然能展开/收起。
-   默认全部带 open，所以页面一打开就是全展开的。 */
+   默认全部带 open，所以页面一打开就是全展开的。
+   分组可能是「年份」，也可能是「星空毕业典礼」这样的专属分组。 */
 .gallery-years {
   display: grid;
   gap: clamp(1.5rem, 3.5vw, 2.5rem);
 }
 
-.year-group {
+.photo-group {
   border-top: 1px solid var(--border);
   padding-top: clamp(0.9rem, 2vw, 1.25rem);
 }
 
-.year-group:first-child {
+.photo-group:first-child {
   border-top: 0;
   padding-top: 0;
 }
 
-.year-group__head {
+.photo-group__head {
   display: flex;
   align-items: baseline;
   gap: 0.7rem;
@@ -936,15 +937,15 @@
 }
 
 /* 去掉浏览器默认的三角标记 */
-.year-group__head::-webkit-details-marker {
+.photo-group__head::-webkit-details-marker {
   display: none;
 }
 
-.year-group__head::marker {
+.photo-group__head::marker {
   content: "";
 }
 
-.year-group__label {
+.photo-group__label {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.6rem);
   font-weight: 600;
@@ -952,13 +953,13 @@
   font-variant-numeric: tabular-nums;
 }
 
-.year-group__count {
+.photo-group__count {
   font-size: 0.8rem;
   color: var(--text-muted);
   letter-spacing: 0.02em;
 }
 
-.year-group__chevron {
+.photo-group__chevron {
   display: grid;
   place-items: center;
   flex: 0 0 auto;
@@ -972,22 +973,22 @@
     color var(--t-base);
 }
 
-.year-group__chevron svg {
+.photo-group__chevron svg {
   width: 14px;
   height: 14px;
 }
 
 /* 展开时箭头朝下 */
-.year-group[open] .year-group__chevron {
+.photo-group[open] .photo-group__chevron {
   transform: rotate(90deg);
 }
 
-.year-group__head:hover .year-group__chevron {
+.photo-group__head:hover .photo-group__chevron {
   border-color: var(--brand);
   color: var(--brand);
 }
 
-.year-group__head:focus-visible {
+.photo-group__head:focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 4px;
   border-radius: var(--r-sm);
@@ -1568,10 +1569,15 @@
   height: 19px;
 }
 
+/* 用 flex 而不是 grid 居中图片：grid 项的百分比 max-height 是按「轨道高度」
+   解析的，轨道会被图片自身撑大，等于没有约束（图片会溢出舞台、下半部分
+   被挤出视口）。flex 子项的百分比按容器高度解析，才能真正把大图缩进屏内。 */
 .lightbox__stage {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: 0;
+  min-width: 0;
   position: relative;
 }
 

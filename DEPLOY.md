@@ -17,7 +17,7 @@ gallery.html
 assets/            ← 整个目录，缺一不可
 ```
 
-共 **104 个文件，约 19.5 MB**。
+共 **296 个文件，约 55.76 MB**。
 
 ### 不需要上传（重要）
 
@@ -124,7 +124,7 @@ gzip_types text/html text/css application/javascript image/svg+xml;
 `text/css`（用浏览器开发者工具的 Network 面板看响应头）。
 
 **5. 图片格式与体积。** `assets/img/` 里同时提供 WebP 和 JPEG，优先加载 WebP。
-现在有 13 张作品、每张 900/1400/2000 三档各出 JPEG 与 WebP，`assets/img/` 共 96 个文件约 19.4 MB。
+现在有 45 张作品、每张 900/1400/2000 三档各出 JPEG 与 WebP，`assets/img/` 共 287 个文件约 55.5 MB。
 如果服务器带宽紧张，可以只保留到 1400px 版本（`*-900` 和 `*-1400`），删掉 2000px 的，
 并相应修改 `tools/pages/gallery.mjs` 里的 `WIDTHS` —— 那是本地构建时才需要的操作。
 
