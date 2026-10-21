@@ -1,0 +1,15 @@
+{
+  "name": "cust-astronomy-club",
+  "private": true,
+  "version": "1.0.0",
+  "description": "CUST 天文协会 社团网站 — 纯静态 HTML/CSS/JS，零运行时依赖。",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "verify": "node tools/verify.mjs",
+    "audit": "node tools/audit-theme.mjs",
+    "check": "node tools/build.mjs && node tools/verify.mjs && node tools/audit-theme.mjs",
+    "images": "python tools/optimize_images.py",
+    "serve": "node tools/serve.mjs"
+  }
+}

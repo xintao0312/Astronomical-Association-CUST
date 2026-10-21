@@ -1,0 +1,10 @@
+# 生成的文件一律用 LF。构建脚本写出来的是 LF，部署目标是 Linux，
+# 若让 Git 按 Windows 习惯转成 CRLF，重新构建时会整文件都显示为改动。
+* text=auto eol=lf
+
+# 二进制资源不做行尾处理
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
