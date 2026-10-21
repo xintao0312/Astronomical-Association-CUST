@@ -83,7 +83,7 @@ export default {
         <svg aria-hidden="true"><use href="#i-info"></use></svg>
         <p>
           <strong>使用说明：</strong>
-          站内照片版权归 CUST 理工天文及拍摄者所有。个人学习与非商业转载请注明来源；
+          站内照片版权归长春理工大学天文协会及拍摄者所有。个人学习与非商业转载请注明来源；
           商业用途请先通过邮件与我们联系。
           照片以 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener">CC BY-NC-SA 4.0</a>
           授权，代码以 MIT 授权。
