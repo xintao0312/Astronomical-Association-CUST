@@ -216,7 +216,7 @@ export default {
       <div class="section-head reveal">
         <p class="eyebrow">最近的活动</p>
         <h2 id="hl-title">从校园广场到宁静的野外</h2>
-        <p>从校园里的观测点到吉林各地的暗夜站点，都是成员自己拍下来的。完整作品在星空画廊。</p>
+        <p>从松花江畔到兴安岭的夜里，都是成员自己拍下来的。完整作品在星空画廊。</p>
       </div>
 
       <div class="grid grid--3" data-stagger="90">

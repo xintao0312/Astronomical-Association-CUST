@@ -53,18 +53,28 @@ function dateKey(shot) {
   return "9999-99-99";
 }
 
-/** 组内排序：先按拍摄地聚合，地点之间与地点内部都按时间先后。 */
-function sortWithin(group) {
+/**
+ * 组内排序：先按拍摄地聚合（同地点的照片相邻）。
+ *   byDate = true  → 地点之间、地点内部都按时间先后（年份组用）
+ *   byDate = false → 保持数据里的书写顺序（专属分组用，可人工编排，
+ *                    比如深空天体按 M31 → M42 → M57 → NGC 6888 排）
+ */
+function sortWithin(group, byDate = true) {
   const places = new Map();
   for (const shot of group) {
     const key = shot.place ?? "\u0000";
     if (!places.has(key)) places.set(key, []);
     places.get(key).push(shot);
   }
-  return [...places.values()]
-    .map((list) => list.slice().sort((a, b) => dateKey(a).localeCompare(dateKey(b))))
-    .sort((a, b) => dateKey(a[0]).localeCompare(dateKey(b[0])))
-    .flat();
+  const lists = [...places.values()].map((list) =>
+    byDate
+      ? list.slice().sort((a, b) => dateKey(a).localeCompare(dateKey(b)))
+      : list.slice()
+  );
+  return (byDate
+    ? lists.sort((a, b) => dateKey(a[0]).localeCompare(dateKey(b[0])))
+    : lists
+  ).flat();
 }
 
 /**
@@ -105,7 +115,7 @@ function groupShots(shots) {
 
   const specialGroups = specials.map((name) => {
     const g = specialIndex.get(name);
-    const sorted = sortWithin(g.shots);
+    const sorted = sortWithin(g.shots, false);
     return { label: g.label, note: g.note, shots: sorted, size: sorted.length };
   });
 
@@ -149,7 +159,7 @@ export default {
   nav: "gallery",
   title: "星空画廊 · CUST 理工天文",
   description:
-    "CUST 理工天文成员拍摄的星空作品：从 2023 年到 2025 年，吉林与内蒙古各地的银河、极光、月食与深空天体摄影，按年份分组。",
+    "CUST 理工天文成员拍摄的星空作品：从 2023 年到 2026 年，黑龙江、吉林与内蒙古各地的银河、极光、月食与深空天体摄影，按年份分组。",
   content: `
   <!-- ============================== page head ============================== -->
   <section class="page-head page-head--photo" aria-labelledby="page-title">
@@ -164,7 +174,8 @@ export default {
       <p class="eyebrow">Gallery</p>
       <h1 id="page-title">星空画廊</h1>
       <p class="lede">
-        这里的每一张都出自社团成员之手，拍摄地从校园周边一直延伸到吉林各地的暗夜站点。
+        这里的每一张都出自社团成员之手，跨度从 2023 年到 2026 年，
+        拍摄地从松花江畔一直延伸到兴安岭的夜里。
         点击任意一张可以放大，查看拍摄地与时间。
       </p>
     </div>

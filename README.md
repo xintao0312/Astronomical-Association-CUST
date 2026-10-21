@@ -7,7 +7,7 @@
 index.html          首页（hero / 社团概况 / 关于 / 活动预览 / 加入 / 联系方式）
 about.html          关于我们（来历 / 三个小组 / 协会概况 / 常见问题）
 activities.html     社团活动（四条常规线完整，其余小节为占位符，见下）
-gallery.html        星空画廊（45 张作品 · 按年份折叠分组 + 灯箱）
+gallery.html        星空画廊（64 张作品 · 按年份折叠分组 + 灯箱）
 404.html            错误页
 
 assets/
@@ -75,7 +75,7 @@ node tools/serve.mjs          # → http://127.0.0.1:5178/
 ## 部署
 
 **纯静态站点，服务器上不需要 Node.js、Python、PHP 或数据库。** 完整清单见
-[DEPLOY.md](DEPLOY.md)：需要上传哪些文件（296 个 / 55.76 MB）、哪些不必传
+[DEPLOY.md](DEPLOY.md)：需要上传哪些文件（406 个 / 78.69 MB）、哪些不必传
 （`image/` 原图有 49.6 MB，别传）、权限与压缩建议、上线自查清单与常见坑。
 
 ## 图片信息也是占位符
