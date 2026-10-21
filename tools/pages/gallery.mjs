@@ -79,17 +79,19 @@ export default {
         <p>每一张都是一次抬头 —— 在不一样的地方，遇见同一片星空。</p>
       </div>
 
-      <div class="gallery-grid" data-gallery data-stagger="80">
-${grid}
-      </div>
-
-      <div class="note mt-3 reveal">
+      <div class="note note--usage mb-2 reveal" id="usage">
         <svg aria-hidden="true"><use href="#i-info"></use></svg>
         <p>
           <strong>使用说明：</strong>
           站内照片版权归 CUST 理工天文及拍摄者所有。个人学习与非商业转载请注明来源；
           商业用途请先通过邮件与我们联系。
+          照片以 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener">CC BY-NC-SA 4.0</a>
+          授权，代码以 MIT 授权。
         </p>
+      </div>
+
+      <div class="gallery-grid" data-gallery data-stagger="80">
+${grid}
       </div>
     </div>
   </section>

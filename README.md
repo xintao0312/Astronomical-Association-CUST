@@ -7,7 +7,7 @@
 index.html          首页（hero / 社团概况 / 关于 / 活动预览 / 加入 / 联系方式）
 about.html          关于我们（来历 / 三个小组 / 协会概况 / 常见问题）
 activities.html     社团活动（四条常规线完整，其余小节为占位符，见下）
-gallery.html        星空画廊（四张作品 + 灯箱 + 拍摄方法）
+gallery.html        星空画廊（13 张作品 + 灯箱 + 拍摄方法）
 404.html            错误页
 
 assets/
@@ -52,6 +52,25 @@ const LOG_ROWS = 4;        // 观测记录表行数
 ```bash
 node tools/serve.mjs          # → http://127.0.0.1:5178/
 ```
+
+## 许可
+
+本仓库包含三类内容，授权各不相同 —— **一个 LICENSE 文件覆盖不了全部**：
+
+| 内容 | 位置 | 授权 | 全文 |
+|---|---|---|---|
+| 源代码（HTML / CSS / JS / 构建脚本） | `*.html`、`assets/css/`、`assets/js/`、`tools/` | **MIT** | [LICENSE](LICENSE) |
+| 摄影作品 | `assets/img/` | **CC BY-NC-SA 4.0** | [LICENSE-PHOTOS](LICENSE-PHOTOS) |
+| 社团徽标与名称 | `assets/img/aac-badge-*`、`favicon.png`、「CUST 理工天文」 | **保留所有权利** | [NOTICE](NOTICE) |
+
+简而言之：
+
+- **代码可以随便用**，改一份给自己的社团也欢迎，保留版权声明即可
+- **照片可署名非商业转载**，商业用途请先联系 `xintao@mails.cust.edu.cn`
+- **徽标和名称不要拿去用**，避免来源混淆；转载本站时正常展示不受限制
+
+站内也把这条说明写在了两处：画廊作品**上方**的使用说明（`gallery.html#usage`），
+以及每个页面页脚的授权行。
 
 ## 部署
 

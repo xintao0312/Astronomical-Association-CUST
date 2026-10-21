@@ -1348,6 +1348,33 @@
   margin: 0;
 }
 
+/* 页脚的授权说明：独立一行，比底栏那排小字更显眼一点 */
+.footer-legal {
+  margin: 0;
+  padding-block: 1.1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.79rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.footer-legal a {
+  color: var(--text-soft);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--brand) 45%, transparent);
+  text-underline-offset: 0.2em;
+}
+
+.footer-legal a:hover {
+  color: var(--brand);
+  text-decoration-color: currentColor;
+}
+
+/* 画廊里置于作品之前的「使用说明」，给一点呼吸 */
+.note--usage {
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
 /* ============================== back-to-top ============================ */
 
 .to-top {

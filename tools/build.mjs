@@ -137,6 +137,15 @@ function footer() {
       </div>
     </div>
 
+    <p class="footer-legal">
+      站内照片版权归 CUST 理工天文及拍摄者所有：个人学习与非商业转载请注明来源，
+      商业用途请先与我们联系（<a href="gallery.html#usage">使用说明</a>）。
+      代码以 <a href="https://opensource.org/license/mit" rel="noopener">MIT</a> 许可发布，
+      照片以
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener">CC BY-NC-SA 4.0</a>
+      许可发布；徽标与名称保留所有权利。
+    </p>
+
     <div class="footer-bottom">
       <p>©<span data-year hidden></span> CUST 理工天文 · 本站照片均由社团成员拍摄</p>
       <p>网站设计&amp;运营：王鑫涛</p>
