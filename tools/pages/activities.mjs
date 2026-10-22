@@ -1,52 +1,18 @@
 // Activities page content.
 //
 // 页面分两部分：
-//   1. 「常规项目」— 四条常年运行的线，内容完整，是这一页的正文。
-//   2. 其余小节 — 仅保留版式骨架（表格列头、时间线节点、卡片结构），
-//      文字内容用 ［…］ 占位符代替，由社团按实际内容填写。
-
-const SCHEDULE_COLUMNS = ["日期", "活动", "负责小组", "地点", "观测 / 内容重点", "参与方式"];
-const SCHEDULE_ROWS = 8;
-
-const LOG_COLUMNS = ["日期", "站点", "目标", "器材", "累计曝光", "天空条件", "记录人"];
-const LOG_ROWS = 4;
-
-/** 每张表都保留列头，用 ［列名］ 占位，社团照着填即可。 */
-function placeholderRows(columns, count) {
-  const cells = columns
-    .map((c) => `<td><span class="ph">［${c}］</span></td>`)
-    .join("");
-  return Array.from({ length: count }, () => `          <tr>${cells}</tr>`).join("\n");
-}
-
-const scheduleCols = SCHEDULE_COLUMNS.map(
-  (c) => `              <th scope="col">${c}</th>`
-).join("\n");
-
-const logCols = LOG_COLUMNS.map(
-  (c) => `              <th scope="col">${c}</th>`
-).join("\n");
-
-/** 时间线条目：结构保留，日期与文字为占位符。 */
-const TIMELINE = [
-  { datetime: "YYYY-MM", range: "［起止月份］", title: "［主题标题］" },
-  { datetime: "YYYY-MM", range: "［起止月份］", title: "［主题标题］" },
-  { datetime: "YYYY-MM", range: "［起止月份］", title: "［主题标题］" },
-];
-
-const timelineItems = TIMELINE.map(
-  (t) => `            <li>
-              <time datetime="${t.datetime}">${t.range}</time>
-              <h3><span class="ph">${t.title}</span></h3>
-              <p class="ph-block">［说明文字］</p>
-            </li>`
-).join("\n");
+//   1. 「常规项目」— 四条常年运行的线，是这一页的正文。
+//   2. 「怎么参加」— 三步说明 + 加入入口。
+//
+// 原先的「活动排期」「观测记录」「全年的观测节奏」三个板块已移除：
+// 日程取决于天气与天象，随时会变，统一以群消息为准；
+// 写死在页面上只会过时，观测记录也已在「星空画廊」里按年份呈现。
 
 export default {
   nav: "activities",
   title: "社团活动 · CUST 理工天文",
   description:
-    "路边天文夜、摄影工坊、天文讲堂、星空观测营 —— CUST 理工天文的常规活动介绍，以及本学期日程与观测记录。",
+    "路边天文夜、摄影工坊、天文讲堂、星空观测营 —— CUST 理工天文的四条常规活动线，以及参与方式。",
   content: `
   <!-- ============================== page head ============================== -->
   <section class="page-head page-head--photo" aria-labelledby="page-title">
@@ -60,7 +26,10 @@ export default {
       </nav>
       <p class="eyebrow">Activities</p>
       <h1 id="page-title">社团活动</h1>
-      <p class="lede ph-block">［页面导语］</p>
+      <p class="lede">
+        四条常年运行的线，覆盖观测、拍摄与讲解；再加上每年一次的远途观测营。
+        不需要天文基础，也不需要自备器材。
+      </p>
     </div>
   </section>
 
@@ -130,96 +99,15 @@ export default {
     </div>
   </section>
 
-  <!-- ============================== schedule ============================== -->
-  <section class="section section--tinted" id="schedule" aria-labelledby="schedule-title">
-    <div class="shell">
-      <div class="section-head reveal">
-        <p class="eyebrow">本学期日程</p>
-        <h2 id="schedule-title">活动排期</h2>
-        <p class="ph-block">［排期说明］</p>
-      </div>
-
-      <div class="log-wrap reveal">
-        <table class="log-table">
-          <caption>［学期排期表］</caption>
-          <thead>
-            <tr>
-${scheduleCols}
-            </tr>
-          </thead>
-          <tbody>
-${placeholderRows(SCHEDULE_COLUMNS, SCHEDULE_ROWS)}
-          </tbody>
-        </table>
-      </div>
-
-      <div class="note mt-2 reveal">
-        <svg aria-hidden="true"><use href="#i-info"></use></svg>
-        <p class="ph-block">［天气与顺延预案说明］</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================== observation log ============================== -->
-  <section class="section" aria-labelledby="log-title">
-    <div class="shell">
-      <div class="section-head reveal">
-        <p class="eyebrow">观测记录</p>
-        <h2 id="log-title">观测记录</h2>
-        <p class="ph-block">［观测记录的用途说明］</p>
-      </div>
-
-      <div class="log-wrap reveal">
-        <table class="log-table">
-          <caption>［观测记录表］</caption>
-          <thead>
-            <tr>
-${logCols}
-            </tr>
-          </thead>
-          <tbody>
-${placeholderRows(LOG_COLUMNS, LOG_ROWS)}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================== a year in the club ============================== -->
-  <section class="section section--tinted" aria-labelledby="timeline-title">
-    <div class="shell">
-      <div class="split">
-        <div class="reveal">
-          <div class="section-head">
-            <p class="eyebrow">一年四季</p>
-            <h2 id="timeline-title">全年的观测节奏</h2>
-            <p class="ph-block">［季节节奏说明］</p>
-          </div>
-
-          <ol class="timeline">
-${timelineItems}
-          </ol>
-        </div>
-
-        <figure class="frame reveal">
-          <img src="assets/img/milkyway-horizon.jpg"
-               srcset="assets/img/milkyway-horizon-900.jpg 900w, assets/img/milkyway-horizon-1400.jpg 1400w, assets/img/milkyway-horizon.jpg 2000w"
-               sizes="(max-width: 860px) 92vw, 44vw"
-               width="2000" height="1493" loading="lazy" decoding="async"
-               alt="［图片说明］">
-          <figcaption><span class="ph">［图片说明］</span></figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================== cta ============================== -->
+  <!-- ============================== how to join ============================== -->
   <section class="section" aria-labelledby="act-cta-title">
     <div class="shell">
       <div class="cta reveal">
         <p class="eyebrow eyebrow--center">怎么参加</p>
-        <h2 id="act-cta-title"><span class="ph">［标题］</span></h2>
-        <p class="ph-block">［参加方式说明］</p>
+        <h2 id="act-cta-title">不用报名，来一次就知道了</h2>
+        <p>
+          协会全年开放，也不收会费；不需要任何天文基础，器材都由协会提供。
+        </p>
         <div class="btn-row">
           <a class="btn btn--primary" href="index.html#join">
             加入我们
@@ -227,6 +115,35 @@ ${timelineItems}
           </a>
           <a class="btn btn--ghost" href="gallery.html">先看看照片</a>
         </div>
+      </div>
+
+      <div class="grid grid--3 mt-3" data-stagger="80">
+        <article class="card reveal">
+          <span class="card__icon" aria-hidden="true"><svg><use href="#i-chat"></use></svg></span>
+          <h3>一、加群</h3>
+          <p>
+            加入 QQ 群 <strong>884842421</strong>。活动时间不固定 —— 要看天气和天象，
+            所以所有安排都只发在群里。
+          </p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon" aria-hidden="true"><svg><use href="#i-pin"></use></svg></span>
+          <h3>二、来现场</h3>
+          <p>
+            路边天文夜多在朝阳校区东区物理学院；摄影工坊与天文讲堂在物理学院 713。
+            可以只看不动手，待多久都行。
+          </p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon" aria-hidden="true"><svg><use href="#i-telescope"></use></svg></span>
+          <h3>三、不用带东西</h3>
+          <p>
+            望远镜、赤道仪、相机都由协会准备，人来就行。
+            如果去野外，记得穿厚一些 —— 夜里的温度比白天低得多。
+          </p>
+        </article>
       </div>
     </div>
   </section>

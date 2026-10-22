@@ -248,7 +248,7 @@ ${highlightCards}
             查看联系方式
             <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
           </a>
-          <a class="btn btn--ghost" href="activities.html#schedule">查看本学期日程</a>
+          <a class="btn btn--ghost" href="activities.html">看看有哪些活动</a>
         </div>
       </div>
     </div>
