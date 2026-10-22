@@ -1382,6 +1382,8 @@
   padding: clamp(0.75rem, 3vw, 1.6rem);
   background: var(--overlay);
   backdrop-filter: blur(16px) saturate(1.2);
+  /* 滚轮与触摸滑动到此为止，不再传给背后的页面 */
+  overscroll-behavior: contain;
   opacity: 0;
   visibility: hidden;
   transition: opacity var(--t-base), visibility var(--t-base);
@@ -1697,6 +1699,13 @@
 
 /* 弹窗打开时锁住背景滚动 */
 :root[data-notice-open] {
+  overflow: hidden;
+}
+
+/* 灯箱打开时同样锁住 <html>。不能只锁 body：<html> 上有 overflow-x: clip，
+   按规范会阻止 body 的 overflow 传播到视口，那样只锁 body 是无效的。
+   页面已设 scrollbar-gutter: stable，因此锁定时不会出现横向抖动。 */
+:root[data-lightbox-open] {
   overflow: hidden;
 }
 

@@ -306,7 +306,9 @@
       render(i);
       lightbox.classList.add("is-open");
       lightbox.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
+      // 锁住背景滚动。必须落在 <html> 上 —— <html> 有 overflow-x: clip，
+      // 按规范这会挡住 body 的 overflow 向视口传播，只设 body 是无效的。
+      root.setAttribute("data-lightbox-open", "");
       var closeBtn = lightbox.querySelector(".lightbox__close");
       if (closeBtn) closeBtn.focus();
     }
@@ -314,7 +316,7 @@
     function close() {
       lightbox.classList.remove("is-open");
       lightbox.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
+      root.removeAttribute("data-lightbox-open");
       if (lastFocus && lastFocus.focus) lastFocus.focus();
     }
 
