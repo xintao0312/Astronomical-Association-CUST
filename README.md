@@ -26,6 +26,8 @@
 - **可访问性。** 正文对比度满足 WCAG AA；灯箱是真正的对话框（`aria-modal`、
   Esc 关闭、方向键切换、焦点锁定）；有跳到主内容的 skip link；
   `prefers-reduced-motion` 下关闭全部动画。
+- **浏览器支持。** 面向现代 Chromium 内核（Chrome、Edge 及基于 Chromium 的浏览器）。
+  不为 Safari / WebKit 做单独适配 —— 见 [AGENTS.md](AGENTS.md)。
 - **图片做了多尺寸与格式。** 每张作品按宽度分档，同时提供 JPEG 与 WebP，
   通过 `srcset` 让浏览器按屏幕挑选。
 
