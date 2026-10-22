@@ -16,3 +16,7 @@ node_modules/
 # 本地的真实部署信息（服务器地址、路径等），不要提交
 DEPLOY.local.md
 DEPLOY.md
+
+# Python 字节码
+__pycache__/
+*.pyc
