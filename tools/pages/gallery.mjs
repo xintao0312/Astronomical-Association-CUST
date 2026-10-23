@@ -21,9 +21,14 @@ function figure(shot, index) {
   const metaRow = meta
     ? `<span class="shot__meta">${pin}${meta}</span>`
     : "";
+  // 署名单独一行，只在照片有明确作者时出现
+  const creditRow = shot.credit
+    ? `<span class="shot__credit">${shot.credit}</span>`
+    : "";
+  const desc = [meta, shot.credit].filter(Boolean).join(" · ");
   return `          <figure class="shot reveal" data-full="${files.full}"
                     data-full-srcset="${files.fullSrcset}"
-                    data-title="${shot.title}" data-desc="${meta}"
+                    data-title="${shot.title}" data-desc="${desc}"
                     tabindex="0" role="button" aria-labelledby="${id}-cap"
                     aria-label="放大查看：${label}">
             <img src="${files.thumb}"
@@ -36,6 +41,7 @@ function figure(shot, index) {
               <span class="shot__text">
                 <span class="shot__title">${shot.title}</span>
                 ${metaRow}
+                ${creditRow}
               </span>
               <span class="shot__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </figcaption>
@@ -107,11 +113,11 @@ function groupShots(shots) {
     years.get(key).push(shot);
   }
 
-  const yearKeys = [...years.keys()].sort((a, b) => {
-    if (a === null) return 1;
-    if (b === null) return -1;
-    return b - a;
-  });
+  // 没有年份的单独成组：排在专属分组之后、年份分组之前
+  const unknown = years.get(null) ?? null;
+  years.delete(null);
+
+  const yearKeys = [...years.keys()].sort((a, b) => b - a);
 
   const specialGroups = specials.map((name) => {
     const g = specialIndex.get(name);
@@ -121,15 +127,21 @@ function groupShots(shots) {
 
   const yearGroups = yearKeys.map((year) => {
     const sorted = sortWithin(years.get(year));
-    return {
-      label: year === null ? "年份待补" : `${year} 年`,
-      note: year === null ? "待补充拍摄年份" : "",
-      shots: sorted,
-      size: sorted.length,
-    };
+    return { label: `${year} 年`, note: "", shots: sorted, size: sorted.length };
   });
 
-  return [...specialGroups, ...yearGroups];
+  const unknownGroups = unknown
+    ? [
+        {
+          label: "未知时间",
+          note: "",
+          shots: sortWithin(unknown),
+          size: unknown.length,
+        },
+      ]
+    : [];
+
+  return [...specialGroups, ...unknownGroups, ...yearGroups];
 }
 
 let counter = 0;

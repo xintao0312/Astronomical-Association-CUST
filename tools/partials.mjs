@@ -55,6 +55,7 @@ export function mediaCard(shot, { chip = "", copy = "" } = {}) {
   const pin = shot.place
     ? `<svg aria-hidden="true"><use href="#i-pin"></use></svg>`
     : "";
+  const metaText = [meta, shot.credit].filter(Boolean).join(" · ");
   const chipRow = chip ? `<p class="chip chip--brand">${chip}</p>` : "";
 
   return `<article class="card card--media reveal">
@@ -66,7 +67,7 @@ export function mediaCard(shot, { chip = "", copy = "" } = {}) {
                  loading="lazy" decoding="async"
                  alt="${shot.alt}">
             <figcaption>
-              <span class="card__thumb-meta">${pin}${meta}</span>
+              <span class="card__thumb-meta">${pin}${metaText}</span>
             </figcaption>
           </div>
           <div class="card__body">

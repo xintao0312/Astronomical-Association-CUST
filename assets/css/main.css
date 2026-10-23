@@ -860,6 +860,14 @@
   flex: 0 0 auto;
 }
 
+/* 作者署名：比拍摄地/时间再淡一档，不抢主体 */
+.shot__credit {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0.66;
+}
+
 /* the zoom affordance is a hover reward, not permanent furniture */
 .shot__zoom {
   display: grid;

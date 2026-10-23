@@ -9,6 +9,7 @@
 //   year   拍摄年份（数字），画廊按它分组；不知道的留空
 //   group  专属分组名（如 "星空毕业典礼"）。填了就不再并入年份分组
 //   groupNote 专属分组标题右侧的补充说明（如 "2022 级"）
+//   credit 作者署名（如 "22 级 黄华凯"）；拍摄者需要被写出来时才填
 //   place  拍摄地（行政区 + 地名）；深空／月食这类没有地点的不填
 //   note   时间或类别，如 "2024 年 5 月 3 日"、"深空天体摄影"
 //   alt    给读屏软件的画面描述，必须写清楚画面内容
@@ -668,6 +669,38 @@ export const SHOTS = [
     widths: W,
   },
 
+  // ---------- 2026 年 · 25 级 魏史成 拍摄的银河 ----------
+  {
+    key: "wsc-1",
+    title: "银河 1",
+    year: 2026,
+    credit: "25 级 魏史成",
+    note: "2026 年 10 月 3 日",
+    focus: "center 50%",
+    alt: "银河纵贯画面，暗尘带清晰，星场密集",
+    widths: W,
+  },
+  {
+    key: "wsc-2",
+    title: "银河 2",
+    year: 2026,
+    credit: "25 级 魏史成",
+    note: "2026 年 10 月 4 日",
+    focus: "center 50%",
+    alt: "银河纵贯画面，暗尘带与明亮的星云区并存",
+    widths: W,
+  },
+  {
+    key: "wsc-3",
+    title: "银河 3",
+    year: 2026,
+    credit: "25 级 魏史成",
+    note: "2026 年 10 月 3 日",
+    focus: "center 50%",
+    alt: "银河纵贯画面，星点细密，暗尘带呈条带状铺开",
+    widths: W,
+  },
+
   // ---------- 其他作品 ----------
   {
     key: "eclipse",
@@ -694,6 +727,7 @@ export const SHOTS = [
     key: "m31",
     title: "M31 仙女座星系",
     group: "深空天体",
+    credit: "22 级 黄华凯",
     focus: "center 50%",
     alt: "单色处理的仙女座星系，明亮的核球与盘面斜跨画面，外围散布着星点",
     widths: W,
@@ -702,6 +736,7 @@ export const SHOTS = [
     key: "m42",
     title: "M42 猎户座大星云",
     group: "深空天体",
+    credit: "22 级 黄华凯",
     focus: "center 50%",
     alt: "猎户座大星云，粉紫色的气体与暗尘带交织在一起，中心区域最亮",
     widths: [900, 1400],
@@ -711,6 +746,7 @@ export const SHOTS = [
     title: "M57 环状星云",
     year: 2024,
     group: "深空天体",
+    credit: "22 级 黄华凯",
     note: "2024 年 11 月 6 日",
     focus: "center 50%",
     alt: "星野中的环状星云，一个小而清晰的圆环悬在星点之间",
@@ -720,9 +756,66 @@ export const SHOTS = [
     key: "ngc6888",
     title: "NGC 6888 新月星云",
     group: "深空天体",
+    credit: "20 级 夏天宏",
     focus: "center 50%",
     alt: "NGC 6888 新月星云，红色的丝状气壳嵌在密集星场中",
     widths: W,
+  },
+
+  // ---------- 深空天体 · 25 级 魏史成 ----------
+  {
+    key: "c63",
+    title: "C63 上帝之眼",
+    group: "深空天体",
+    credit: "25 级 魏史成",
+    focus: "center 50%",
+    alt: "C63 上帝之眼：一圈红色的环状星云包着蓝绿色的内部，中心有一颗亮星，四周散布星点",
+    widths: W,
+  },
+  {
+    key: "hcg92",
+    title: "HCG-92 史蒂夫五重奏",
+    group: "深空天体",
+    credit: "25 级 魏史成",
+    focus: "center 50%",
+    alt: "HCG-92 史蒂夫五重奏：几个星系聚在一处，形态各异，右上方有一颗很亮的星",
+    widths: [600, 800],
+  },
+  {
+    key: "lc1805",
+    title: "LC-1805",
+    group: "深空天体",
+    credit: "25 级 魏史成",
+    focus: "center 50%",
+    alt: "LC-1805：大片红色的云气横贯画面，内部有明暗交错的丝状结构",
+    widths: W,
+  },
+  {
+    key: "m33",
+    title: "M33",
+    group: "深空天体",
+    credit: "25 级 魏史成",
+    focus: "center 50%",
+    alt: "M33 三角座星系：正面朝向的旋涡星系，旋臂松散，散布着亮斑",
+    widths: W,
+  },
+  {
+    key: "m45",
+    title: "M45 昴星团",
+    group: "深空天体",
+    credit: "25 级 魏史成",
+    focus: "center 50%",
+    alt: "M45 昴星团：几颗亮星被蓝色的星云包裹，周围是细密的星点",
+    widths: W,
+  },
+  {
+    key: "ngc7331",
+    title: "NGC-7331",
+    group: "深空天体",
+    credit: "25 级 魏史成",
+    focus: "center 50%",
+    alt: "NGC-7331：侧向的旋涡星系，盘面细长，旁边还有几个更小的星系",
+    widths: [600, 1000],
   },
   {
     key: "moon-full",

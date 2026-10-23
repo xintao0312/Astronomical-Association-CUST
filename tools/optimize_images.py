@@ -103,6 +103,16 @@ PHOTOS = {
     "dajianggang-3": "20240330吉林省四平市伊通县河源镇大酱缸村/20240330-232022-3.png",
     "erdao-1": "20241110吉林省延边州安图县二道白河镇/20241110-001238-2.png",
     "erdao-2": "20241110吉林省延边州安图县二道白河镇/20241115-7473-4.png",
+    # 魏史成（25 级）
+    "c63": "25魏史成深空/C63_上帝之眼.png",
+    "hcg92": "25魏史成深空/HCG-92_史蒂夫五重奏.jpg",
+    "lc1805": "25魏史成深空/LC-1805.jpg",
+    "m33": "25魏史成深空/M33.jpg",
+    "m45": "25魏史成深空/M45_昴星团.jpg",
+    "ngc7331": "25魏史成深空/NGC-7331.jpg",
+    "wsc-1": "25魏史成/MilkyWay_WSC-1.jpg",
+    "wsc-2": "25魏史成/MilkyWay_WSC-2.jpg",
+    "wsc-3": "25魏史成/MilkyWay_WSC-3.jpg",
 }
 
 # key -> target widths for the responsive srcset
@@ -172,6 +182,15 @@ PHOTO_WIDTHS = {
     "dajianggang-3": [900, 1400, 2000],
     "erdao-1": [900, 1400, 2000],
     "erdao-2": [900, 1400, 2000],
+    "c63": [900, 1400, 2000],
+    "hcg92": [600, 800],
+    "lc1805": [900, 1400, 2000],
+    "m33": [900, 1400, 2000],
+    "m45": [900, 1400, 2000],
+    "ngc7331": [600, 1000],
+    "wsc-1": [900, 1400, 2000],
+    "wsc-2": [900, 1400, 2000],
+    "wsc-3": [900, 1400, 2000],
 }
 
 # the circular badge, rendered large enough for hidpi at any header size we use
@@ -260,6 +279,8 @@ def main() -> None:
             continue
 
         with Image.open(path) as raw:
+            # 记下源文件的 ICC 色彩配置：丢掉它会让广色域作品的颜色发闷
+            icc = raw.info.get("icc_profile")
             img = ImageOps.exif_transpose(raw).convert("RGB")
             print(f"{filename}: source {img.width}x{img.height}")
 
@@ -273,9 +294,12 @@ def main() -> None:
                 )
                 suffix = "" if width == max(PHOTO_WIDTHS[key]) else f"-{width}"
                 jpg = OUT / f"{key}{suffix}.jpg"
-                resized.save(jpg, "JPEG", quality=80, optimize=True, progressive=True)
+                keep = {"icc_profile": icc} if icc else {}
+                resized.save(
+                    jpg, "JPEG", quality=80, optimize=True, progressive=True, **keep
+                )
                 webp = OUT / f"{key}{suffix}.webp"
-                resized.save(webp, "WEBP", quality=76, method=6)
+                resized.save(webp, "WEBP", quality=76, method=6, **keep)
                 print(
                     f"  -> {jpg.name} {resized.width}x{resized.height} "
                     f"{jpg.stat().st_size // 1024} KB | "
