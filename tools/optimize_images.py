@@ -3,6 +3,10 @@
 Reads the untouched originals from image/ and writes optimised files into
 assets/img/.  Never modifies the sources.
 
+用法：
+  python tools/optimize_images.py                  全量生成
+  python tools/optimize_images.py --only m42b      只生成 m42b（加图时用，几秒完成）
+
 Two groups:
 
   photos  aac1-aac3 + 250908  -> multi-width JPEG / WebP for srcset
@@ -17,6 +21,7 @@ gradient veil shows through it, and is emitted twice:
   aac-hero-invert.webp the same artwork inverted (dark mode, mix-blend-mode: screen)
 """
 
+import argparse
 from pathlib import Path
 
 from PIL import Image, ImageOps
@@ -106,13 +111,17 @@ PHOTOS = {
     # 魏史成（25 级）
     "c63": "25魏史成深空/C63_上帝之眼.png",
     "hcg92": "25魏史成深空/HCG-92_史蒂夫五重奏.jpg",
-    "lc1805": "25魏史成深空/LC-1805.jpg",
+    "ic1805": "25魏史成深空/IC-1805_2.jpg",
     "m33": "25魏史成深空/M33.jpg",
     "m45": "25魏史成深空/M45_昴星团.jpg",
     "ngc7331": "25魏史成深空/NGC-7331.jpg",
     "wsc-1": "25魏史成/MilkyWay_WSC-1.jpg",
     "wsc-2": "25魏史成/MilkyWay_WSC-2.jpg",
     "wsc-3": "25魏史成/MilkyWay_WSC-3.jpg",
+    "ic1805b": "25魏史成深空/IC-1805.jpg",
+    "m31b": "25魏史成深空/M31_仙女座星系.png",
+    "m31c": "25魏史成深空/M31_仙女座星系-2.jpg",
+    "m42b": "25魏史成深空/M42_猎户座.png",
 }
 
 # key -> target widths for the responsive srcset
@@ -184,13 +193,17 @@ PHOTO_WIDTHS = {
     "erdao-2": [900, 1400, 2000],
     "c63": [900, 1400, 2000],
     "hcg92": [600, 800],
-    "lc1805": [900, 1400, 2000],
+    "ic1805": [900, 1400, 2000],
     "m33": [900, 1400, 2000],
     "m45": [900, 1400, 2000],
     "ngc7331": [600, 1000],
     "wsc-1": [900, 1400, 2000],
     "wsc-2": [900, 1400, 2000],
     "wsc-3": [900, 1400, 2000],
+    "ic1805b": [900, 1400, 2000],
+    "m31b": [900, 1400, 2000],
+    "m31c": [900, 1400, 2000],
+    "m42b": [900, 1400, 2000],
 }
 
 # the circular badge, rendered large enough for hidpi at any header size we use
@@ -271,8 +284,23 @@ def save_hero_logo() -> None:
             print(f"  -> {inv_path.name} {inv_path.stat().st_size // 1024} KB")
 
 
-def main() -> None:
-    for key, filename in PHOTOS.items():
+def main(only=None) -> None:
+    keys = list(PHOTOS)
+
+    if only:
+        unknown = [k for k in only if k not in PHOTOS]
+        if unknown:
+            raise SystemExit(
+                "未知的 key：%s\n可用的 key：\n  %s"
+                % (", ".join(unknown), "\n  ".join(keys))
+            )
+        keys = [k for k in keys if k in only]
+        print(f"只生成指定的 {len(keys)} 项：{', '.join(keys)}")
+
+    done = 0
+
+    for key in keys:
+        filename = PHOTOS[key]
         path = SRC / filename
         if not path.exists():
             print(f"skip (missing): {path}")
@@ -306,9 +334,25 @@ def main() -> None:
                     f"{webp.name} {webp.stat().st_size // 1024} KB"
                 )
 
-    save_badge()
-    save_hero_logo()
+        done += 1
+
+    # 社徽与 hero 与作品无关，指定 --only 时不重复生成
+    if not only:
+        save_badge()
+        save_hero_logo()
+
+    print(f"完成：生成 {done} 项")
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(
+        description="生成 assets/img/ 下的图片资源。不带参数时全量生成。"
+    )
+    parser.add_argument(
+        "--only",
+        nargs="+",
+        metavar="KEY",
+        help="只生成这些 key（对应 PHOTOS 里的键名），其余跳过",
+    )
+    main(parser.parse_args().only)
+

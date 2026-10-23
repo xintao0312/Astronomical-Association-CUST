@@ -96,6 +96,12 @@ node tools/audit-theme.mjs    # 审计主题令牌与对比度
 python tools/optimize_images.py
 ```
 
+只重新生成其中几张（新增素材时更快）：
+
+```bash
+python tools/optimize_images.py --only m42b
+```
+
 该脚本需要 Python 与 Pillow：`pip install Pillow`。
 
 ## URL 参数
